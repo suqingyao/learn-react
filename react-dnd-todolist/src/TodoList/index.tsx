@@ -3,11 +3,7 @@ import GarbageBin from '../GarbageBin';
 import List from './List';
 import NewItem from '../NewItem';
 
-interface TodoListProps {
-  items: string[];
-}
-
-const TodoList = ({ items }: TodoListProps) => {
+const TodoList = () => {
   return (
     <div className={cn('w-1000 h-600 m-auto mt-100 p-10', 'border-2 border-black', 'flex justify-between items-start')}>
       <div className="flex-2 h-full mr-10  overflow-auto">
