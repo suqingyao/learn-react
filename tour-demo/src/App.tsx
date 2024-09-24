@@ -1,0 +1,93 @@
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import Tour from './components/Tour';
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <div id="step1">
+        <a
+          href="https://vitejs.dev"
+          target="_blank">
+          <img
+            src={viteLogo}
+            className="logo"
+            alt="Vite logo"
+          />
+        </a>
+        <a
+          href="https://react.dev"
+          target="_blank">
+          <img
+            src={reactLogo}
+            className="logo react"
+            alt="React logo"
+          />
+        </a>
+      </div>
+      <h1 id="step2">Vite + React</h1>
+      <div className="card">
+        <button
+          id="step3"
+          onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p
+        id="step4"
+        className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+
+      <Tour
+        steps={[
+          {
+            selector: () => {
+              return document.getElementById('step1');
+            },
+            renderContent: () => {
+              return 'This is the first step';
+            },
+            placement: 'bottom'
+          },
+          {
+            selector: () => {
+              return document.getElementById('step2');
+            },
+            renderContent: () => {
+              return 'This is the second step';
+            },
+            placement: 'bottom'
+          },
+          {
+            selector: () => {
+              return document.getElementById('step3');
+            },
+            renderContent: () => {
+              return 'This is the third step';
+            },
+            placement: 'bottom'
+          },
+          {
+            selector: () => {
+              return document.getElementById('step4');
+            },
+            renderContent: () => {
+              return 'This is the fourth step';
+            },
+            placement: 'bottom'
+          }
+        ]}
+      />
+    </>
+  );
+}
+
+export default App;

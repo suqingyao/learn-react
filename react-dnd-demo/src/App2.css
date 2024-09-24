@@ -1,0 +1,17 @@
+.card {
+  width: 200px;
+  line-height: 60px;
+  padding: 0 20px;
+  border: 1px solid #000;
+  margin: 10px;
+  cursor: move;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.card.dragging {
+  background-color: #fff;
+  color: #000;
+  border: 1px dashed #000;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
