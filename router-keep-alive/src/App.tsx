@@ -61,18 +61,18 @@ const routes = [
     children: [
       {
         path: '/',
-        element: <Aaa></Aaa>
+        element: <Aaa></Aaa>,
       },
       {
         path: '/bbb',
-        element: <Bbb></Bbb>
+        element: <Bbb></Bbb>,
       },
       {
         path: '/ccc',
-        element: <Ccc></Ccc>
-      }
-    ]
-  }
+        element: <Ccc></Ccc>,
+      },
+    ],
+  },
 ];
 
 const router = createBrowserRouter(routes);
