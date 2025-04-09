@@ -1,10 +1,10 @@
-import iframeRaw from './iframe.html?raw';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { PlaygroundContext } from '../../PlaygroundContext';
-import CompilerWorker from './compiler.worker?worker';
 // import Editor from '../CodeEditor/Editor';
+import iframeRaw from './iframe.html?raw';
 import { IMPORT_MAP_FILE_NAME } from '../../files';
 import { Message } from '../Message';
+import CompilerWorker from './compiler.worker?worker';
 import { debounce } from 'lodash-es';
 
 interface MessageData {
@@ -29,7 +29,7 @@ export default function Preview() {
         if (data.type === 'COMPILED_CODE') {
           setCompiledCode(data.data);
         } else {
-          console.log('error', data);
+          console.error('error', data);
         }
       });
     }
@@ -44,14 +44,15 @@ export default function Preview() {
 
   const getIframeUrl = () => {
     const res = iframeRaw
-      .replace(
-        '<script type="importmap"></script>',
-        `<script type="importmap">${files[IMPORT_MAP_FILE_NAME].value}</script>`,
-      )
-      .replace(
-        '<script type="module" id="appSrc"></script>',
-        `<script type="module" id="appSrc">${compiledCode}</script>`,
-      );
+    .replace(
+      '<script type="importmap"></script>',
+      `<script type="importmap">${files[IMPORT_MAP_FILE_NAME].value}</script>`,
+    )
+    .replace(
+      `<script type="module" id="appSrc"></script>`,
+      `<script type="module" id="appSrc">${compiledCode}</script>`,
+    );
+
     return URL.createObjectURL(new Blob([res], { type: 'text/html' }));
   };
 
@@ -77,8 +78,6 @@ export default function Preview() {
 
   return (
     <div style={{ height: '100%' }}>
-      {/* <Editor file={{ name: 'dist.js', value: compiledCode, language: 'javascript' }} /> */}
-
       <iframe
         src={iframeUrl}
         style={{
@@ -88,13 +87,16 @@ export default function Preview() {
           border: 'none',
         }}
       />
+      <Message
+        type="error"
+        content={error}
+      />
 
-      {error && (
-        <Message
-          type="error"
-          message={error}
-        />
-      )}
+      {/* <Editor file={{
+            name: 'dist.js',
+            value: compiledCode,
+            language: 'javascript'
+        }}/> */}
     </div>
   );
 }
