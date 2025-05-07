@@ -4,15 +4,12 @@
       type,
       props: {
         ...props,
-        children: children.map((child) => {
-          const isTextNode = typeof child === 'string' || typeof child === 'number';
-          return isTextNode ? createTextNode(child) : child;
-        }),
+        children: children.map((child) => (typeof child === 'object' ? child : createTextElement(child))),
       },
     };
   }
 
-  function createTextNode(nodeValue) {
+  function createTextElement(nodeValue) {
     return {
       type: 'TEXT_ELEMENT',
       props: {
